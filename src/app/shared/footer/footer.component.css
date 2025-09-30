@@ -1,0 +1,13 @@
+/* Footer component styles */
+footer {
+  flex-shrink: 0;
+}
+
+/* Custom link hover effects */
+.footer-link {
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
