@@ -1,72 +1,76 @@
-<nav class="bg-blue-600 shadow-lg">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between h-16">
-      <div class="flex items-center">
-        <div class="flex-shrink-0">
-          <a routerLink="/" class="text-white text-xl font-bold">
-            ShipSelaa
-          </a>
-        </div>
-        <div class="hidden md:block ml-10">
-          <div class="flex items-baseline space-x-4">
-            <a routerLink="/" routerLinkActive="bg-blue-700" [routerLinkActiveOptions]="{exact: true}"
-               class="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-              Home
-            </a>
-            <a routerLink="/demandes" routerLinkActive="bg-blue-700"
-               class="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-              Demandes
-            </a>
-            <a routerLink="/livreurs" routerLinkActive="bg-blue-700"
-               class="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-              Livreurs
-            </a>
-            <a routerLink="/managers" routerLinkActive="bg-blue-700"
-               class="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-              Managers
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Mobile menu button -->
-      <div class="md:hidden flex items-center">
-        <button (click)="toggleMenu()" 
-                class="text-white hover:text-gray-300 focus:outline-none focus:text-gray-300">
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path *ngIf="!isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                  d="M4 6h16M4 12h16M4 18h16"/>
-            <path *ngIf="isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                  d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-        </button>
-      </div>
+<header class="flex items-center justify-between whitespace-nowrap border-b border-primary/20 dark:border-primary/30 px-10 py-4">
+  <div class="flex items-center gap-10">
+    <div class="flex items-center gap-3 text-background-dark">
+      <span class="material-symbols-outlined text-primary text-3xl">local_shipping</span>
+      <h2 class="text-xl font-bold">
+        <a routerLink="/" class="hover:text-primary transition-colors">
+          ShipSelaa
+        </a>
+      </h2>
     </div>
-  </div>
-
-  <!-- Mobile menu -->
-  <div class="md:hidden" [class.block]="isMenuOpen" [class.hidden]="!isMenuOpen">
-    <div class="px-2 pt-2 pb-3 space-y-1 bg-blue-700">
-      <a routerLink="/" routerLinkActive="bg-blue-800" [routerLinkActiveOptions]="{exact: true}"
-         (click)="closeMenu()"
-         class="text-white hover:bg-blue-800 block px-3 py-2 rounded-md text-base font-medium transition-colors">
+    <nav class="hidden md:flex items-center gap-8">
+      <a routerLink="/" routerLinkActive="text-primary" [routerLinkActiveOptions]="{exact: true}"
+         class="text-sm font-medium text-background-dark hover:text-primary transition-colors">
         Home
       </a>
-      <a routerLink="/demandes" routerLinkActive="bg-blue-800"
-         (click)="closeMenu()"
-         class="text-white hover:bg-blue-800 block px-3 py-2 rounded-md text-base font-medium transition-colors">
+      <a routerLink="/demandes" routerLinkActive="text-primary"
+         class="text-sm font-medium text-background-dark hover:text-primary transition-colors">
         Demandes
       </a>
-      <a routerLink="/livreurs" routerLinkActive="bg-blue-800"
-         (click)="closeMenu()"
-         class="text-white hover:bg-blue-800 block px-3 py-2 rounded-md text-base font-medium transition-colors">
+      <a routerLink="/livreurs" routerLinkActive="text-primary"
+         class="text-sm font-medium text-background-dark hover:text-primary transition-colors">
         Livreurs
       </a>
-      <a routerLink="/managers" routerLinkActive="bg-blue-800"
-         (click)="closeMenu()"
-         class="text-white hover:bg-blue-800 block px-3 py-2 rounded-md text-base font-medium transition-colors">
+      <a routerLink="/managers" routerLinkActive="text-primary"
+         class="text-sm font-medium text-background-dark hover:text-primary transition-colors">
         Managers
       </a>
+    </nav>
+  </div>
+
+  <div class="flex items-center gap-4">
+
+
+
+    <div class="w-10 h-10 rounded-full bg-cover bg-center cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD8bLRk9N9VD_PNEv7ULrpEPtWnKR-GipL99hBO66Hzz-_mXSXZAvQI7KtzgmrAyjN65pzrN2hPxxIEEA-XJevp8KH4B6Dw-fy5WAvUVy8z-xP3qwrAa_RC2vdda0uEsH9cQAFMkjIQdDMx1dfH15d9dXFiGkansGtdii-B2N-G519fWUxk2UTeOuuc3F7vabskSK_DVqW2RTgxxOE4wWIo78k5GOIwgirVfBWX5W5I6z1OFeAnkdckKJT9hxaRCOuxCWwW3S72ndGP")'></div>
+
+
+    <div class="md:hidden flex items-center">
+      <button (click)="toggleMenu()"
+              class="text-background-dark hover:text-primary focus:outline-none focus:text-primary">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path *ngIf="!isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"/>
+          <path *ngIf="isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
     </div>
   </div>
-</nav>
+</header>
+
+<!-- Mobile menu -->
+<div class="md:hidden border-b border-primary/20 dark:border-primary/30" [class.block]="isMenuOpen" [class.hidden]="!isMenuOpen">
+  <div class="px-10 py-4 space-y-4 bg-white dark:bg-gray-900">
+    <a routerLink="/" routerLinkActive="text-primary" [routerLinkActiveOptions]="{exact: true}"
+       (click)="closeMenu()"
+       class="block text-sm font-medium text-background-dark hover:text-primary transition-colors">
+      Home
+    </a>
+    <a routerLink="/demandes" routerLinkActive="text-primary"
+       (click)="closeMenu()"
+       class="block text-sm font-medium text-background-dark hover:text-primary transition-colors">
+      Demandes
+    </a>
+    <a routerLink="/livreurs" routerLinkActive="text-primary"
+       (click)="closeMenu()"
+       class="block text-sm font-medium text-background-dark hover:text-primary transition-colors">
+      Livreurs
+    </a>
+    <a routerLink="/managers" routerLinkActive="text-primary"
+       (click)="closeMenu()"
+       class="block text-sm font-medium text-background-dark hover:text-primary transition-colors">
+      Managers
+    </a>
+  </div>
+</div>

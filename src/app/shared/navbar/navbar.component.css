@@ -3,7 +3,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* Custom responsive breakpoints if needed */
+/* Smooth transition for mobile menu */
 @media (max-width: 768px) {
   .mobile-menu {
     animation: slideDown 0.3s ease-in-out;
@@ -19,4 +19,13 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Material Icons font styling */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
 }

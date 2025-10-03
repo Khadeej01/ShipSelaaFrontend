@@ -1,61 +1,106 @@
-<!-- Hero Section -->
-<section class="bg-gray-50">
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+<main class="flex-1">
+  <!-- Hero Section -->
+  <section class="relative min-h-[500px] flex items-center justify-center text-center text-white bg-center bg-cover" style='background-image: linear-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%), url("https://images.unsplash.com/photo-1587573089734-09cb69c0f2b4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");'>
+    <div class="flex flex-col items-center gap-6 px-4">
+      <h1 class="text-4xl md:text-6xl font-black tracking-tight">Livrez tout, n'importe où</h1>
+      <p class="max-w-2xl text-base md:text-lg text-white/90">ShipSelaa vous connecte avec des coursiers fiables pour des livraisons rapides et sécurisées.</p>
+    </div>
+  </section>
 
-    <!-- Left side (text content) -->
-    <div>
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-        Welcome to <span class="text-blue-600">ShipSelaa</span>
-      </h1>
-      <p class="text-lg text-gray-600 mb-6">
-        Streamline your delivery operations with our powerful platform that connects
-        managers and drivers seamlessly.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4">
-        <button routerLink="/demandes"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold">
-          View Deliveries
+  <!-- Services Section -->
+  <section class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-background-dark">Explorez nos services</h2>
+        <p class="mt-4 text-lg text-background-dark">Des solutions de livraison pour tous vos besoins.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="flex flex-col gap-4 bg-background-light dark:bg-primary/10 p-6 rounded-xl transition-all hover:shadow-lg hover:-translate-y-1">
+          <img src="assets/Livraison de nourriture.jpg" alt="Livraison de nourriture" class="w-full h-40 object-cover rounded-lg">
+          <div>
+            <h3 class="font-bold text-lg text-background-dark">Livraison de nourriture</h3>
+            <p class="text-sm text-background-dark mt-1">Commandez de vos restaurants préférés.</p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4 bg-background-light dark:bg-primary/10 p-6 rounded-xl transition-all hover:shadow-lg hover:-translate-y-1">
+          <img src="assets/Livraison de colis.jpg" alt="Livraison de colis" class="w-full h-40 object-cover rounded-lg">
+          <div>
+            <h3 class="font-bold text-lg text-background-dark">Livraison de colis</h3>
+            <p class="text-sm text-background-dark mt-1">Envoyez des colis à vos proches.</p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4 bg-background-light dark:bg-primary/10 p-6 rounded-xl transition-all hover:shadow-lg hover:-translate-y-1">
+          <img src="assets/Livraison express.jpg" alt="Livraison express" class="w-full h-40 object-cover rounded-lg">
+          <div>
+            <h3 class="font-bold text-lg text-background-dark">Livraison express</h3>
+            <p class="text-sm text-background-dark mt-1">Livraison rapide en moins d'une heure.</p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4 bg-background-light dark:bg-primary/10 p-6 rounded-xl transition-all hover:shadow-lg hover:-translate-y-1">
+          <img src="assets/Livraison de documents.jpg" alt="Livraison de documents" class="w-full h-40 object-cover rounded-lg">
+          <div>
+            <h3 class="font-bold text-lg text-background-dark">Livraison de documents</h3>
+            <p class="text-sm text-background-dark mt-1">Livraison sécurisée de documents importants.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it Works Section -->
+  <section class="py-16 sm:py-24 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-white">Comment ça marche ?</h2>
+        <p class="mt-4 text-lg text-white">Un processus simple en trois étapes.</p>
+      </div>
+      <div class="relative">
+        <div aria-hidden="true" class="absolute left-1/2 -translate-x-1/2 top-5 h-full w-0.5 bg-primary/20 dark:bg-primary/30"></div>
+        <div class="flex flex-col gap-12">
+          <div class="flex items-center gap-8">
+            <div class="flex-shrink-0 z-10 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center">
+              <span class="material-symbols-outlined">edit_location_alt</span>
+            </div>
+            <div class="bg-background-light dark:bg-background-dark p-6 rounded-xl flex-1 shadow-sm">
+              <h3 class="font-bold text-lg text-white">1. Entrez les détails</h3>
+              <p class="mt-1 text-white">Indiquez l'adresse de départ et d'arrivée, ainsi que le type d'article à livrer.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-8">
+            <div class="flex-shrink-0 z-10 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center">
+              <span class="material-symbols-outlined">group</span>
+            </div>
+            <div class="bg-background-light dark:bg-background-dark p-6 rounded-xl flex-1 shadow-sm">
+              <h3 class="font-bold text-lg text-white">2. Choisissez un coursier</h3>
+              <p class="mt-1 text-white">Sélectionnez un coursier en fonction de son tarif et de sa disponibilité.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-8">
+            <div class="flex-shrink-0 z-10 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center">
+              <span class="material-symbols-outlined">track_changes</span>
+            </div>
+            <div class="bg-background-light dark:bg-background-dark p-6 rounded-xl flex-1 shadow-sm">
+              <h3 class="font-bold text-lg text-white">3. Suivez votre livraison</h3>
+              <p class="mt-1 text-white">Recevez des mises à jour en temps réel sur l'emplacement de votre coursier et l'heure d'arrivée estimée.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-background-dark">Prêt à commencer ?</h2>
+      <p class="mt-4 text-lg text-background-dark max-w-2xl mx-auto">Rejoignez des milliers d'utilisateurs qui font confiance à ShipSelaa pour leurs besoins de livraison.</p>
+      <div class="mt-8">
+        <button routerLink="/demandes" class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg text-base transition-colors">
+          Commencer une livraison
         </button>
-        <button routerLink="/livreurs"
-                class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-semibold">
-          Manage Drivers
-        </button>
       </div>
     </div>
-
-
-    <div class="flex justify-center">
-      <img src="assets/pexels-yankrukov-6818162.jpg" alt="Delivery Illustration" class="w-full max-w-md rounded-lg shadow-lg">
-    </div>
-
-  </div>
-</section>
-
-
-
-<section class="py-16 bg-gray-50">
-  <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">
-      Why Choose ShipSelaa?
-    </h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
-        <div class="text-4xl mb-4">🚚</div>
-        <h3 class="text-xl font-semibold mb-2">Fast Deliveries</h3>
-        <p class="text-gray-600">Optimize routes and ensure quick delivery for your clients.</p>
-      </div>
-      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
-        <div class="text-4xl mb-4">📦</div>
-        <h3 class="text-xl font-semibold mb-2">Easy Management</h3>
-        <p class="text-gray-600">Track and manage deliveries, drivers, and clients from one place.</p>
-      </div>
-      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
-        <div class="text-4xl mb-4">💡</div>
-        <h3 class="text-xl font-semibold mb-2">Smart Platform</h3>
-        <p class="text-gray-600">A modern solution for managers and drivers to collaborate efficiently.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
+</main>
 
 
