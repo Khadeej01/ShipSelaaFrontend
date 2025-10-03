@@ -1,0 +1,7 @@
+export enum StatusDemande {
+  CREATED = 'CREATED',
+  ASSIGNED = 'ASSIGNED',
+  EN_COURS = 'EN_COURS',
+  LIVRE = 'LIVRE',
+  CANCELLED = 'CANCELLED'
+}
