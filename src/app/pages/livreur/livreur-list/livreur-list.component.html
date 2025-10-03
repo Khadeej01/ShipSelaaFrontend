@@ -1,0 +1,183 @@
+<div class="container mx-auto px-4 py-8">
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-background-dark">Livreurs Management</h1>
+    <button
+      (click)="onAddNew()"
+      class="bg-primary hover:bg-primary/90 text-background-dark font-medium py-2 px-4 rounded-lg transition duration-200 flex items-center">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+      </svg>
+      Add New Livreur
+    </button>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+    <div class="flex">
+      <svg class="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+      </svg>
+      <div class="ml-3">
+        <p class="text-sm text-red-800">{{ error }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add/Edit Form -->
+  <div *ngIf="showForm" class="bg-white shadow-sm rounded-lg p-6 mb-6">
+    <h2 class="text-xl font-bold text-background-dark mb-4">
+      {{ editingLivreur ? 'Edit Livreur' : 'Add New Livreur' }}
+    </h2>
+    
+    <form [formGroup]="livreurForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Name Field -->
+        <div>
+          <label for="nom" class="block text-sm font-medium text-background-dark mb-2">
+            Name *
+          </label>
+          <input
+            type="text"
+            id="nom"
+            formControlName="nom"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+            placeholder="Enter livreur name"
+            [class.border-red-500]="getFieldError('nom')"
+          />
+          <p *ngIf="getFieldError('nom')" class="mt-1 text-sm text-red-600">
+            {{ getFieldError('nom') }}
+          </p>
+        </div>
+
+        <!-- Email Field -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-background-dark mb-2">
+            Email *
+          </label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+            placeholder="Enter email address"
+            [class.border-red-500]="getFieldError('email')"
+          />
+          <p *ngIf="getFieldError('email')" class="mt-1 text-sm text-red-600">
+            {{ getFieldError('email') }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Availability -->
+      <div class="flex items-center">
+        <input
+          type="checkbox"
+          id="disponible"
+          formControlName="disponible"
+          class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+        />
+        <label for="disponible" class="ml-2 block text-sm text-background-dark">
+          Available for assignments
+        </label>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="flex justify-end space-x-3 pt-4">
+        <button
+          type="button"
+          (click)="cancelForm()"
+          class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-background-dark bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition duration-200">
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-background-dark bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition duration-200"
+          [disabled]="loading || livreurForm.invalid">
+          {{ editingLivreur ? 'Update' : 'Create' }} Livreur
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading && !showForm" class="flex justify-center items-center py-12">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+  </div>
+
+  <!-- Livreurs Table -->
+  <div *ngIf="!loading" class="bg-white shadow-sm rounded-lg overflow-hidden">
+    <div *ngIf="livreurs.length === 0" class="text-center py-12">
+      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+      </svg>
+      <h3 class="mt-2 text-sm font-medium text-background-dark">No livreurs</h3>
+      <p class="mt-1 text-sm text-gray-500">Get started by adding a new livreur.</p>
+      <div class="mt-6">
+        <button
+          (click)="onAddNew()"
+          class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-background-dark bg-primary hover:bg-primary/90">
+          <svg class="-ml-1 mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
+          </svg>
+          New Livreur
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="livreurs.length > 0" class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let livreur of livreurs" class="hover:bg-gray-50">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-background-dark">
+              #{{ livreur.id }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-background-dark">
+              {{ livreur.nom }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-background-dark">
+              {{ livreur.email }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <button
+                (click)="toggleAvailability(livreur)"
+                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full transition duration-200"
+                [class]="livreur.disponible ? 'bg-green-100 text-green-800 hover:bg-green-200' : 'bg-red-100 text-red-800 hover:bg-red-200'">
+                {{ livreur.disponible ? 'Available' : 'Unavailable' }}
+              </button>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <div class="flex justify-end space-x-2">
+                <button
+                  (click)="onEdit(livreur)"
+                  class="text-indigo-600 hover:text-indigo-900 p-1 rounded hover:bg-indigo-50 transition duration-200"
+                  title="Edit">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                  </svg>
+                </button>
+                <button
+                  (click)="onDelete(livreur)"
+                  class="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50 transition duration-200"
+                  title="Delete">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
