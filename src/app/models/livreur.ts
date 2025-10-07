@@ -1,7 +1,7 @@
 export interface Livreur {
-  id: number;
+  id?: number;
   nom: string;
   email: string;
-  phone?: string;
+  password?: string;
   disponible?: boolean;
 }

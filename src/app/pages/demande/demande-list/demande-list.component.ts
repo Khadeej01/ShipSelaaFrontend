@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DemandeService } from '../../../services/demande.service';
-import { Demande, StatusDemande } from '../../../models';
+import { LivreurService } from '../../../services/livreur.service';
+import { Demande, StatusDemande, Livreur } from '../../../models';
 
 @Component({
   selector: 'app-demande-list',
@@ -13,16 +14,24 @@ import { Demande, StatusDemande } from '../../../models';
 })
 export class DemandeListComponent implements OnInit {
   demandes: Demande[] = [];
+  livreurs: Livreur[] = [];
   loading = false;
   error: string | null = null;
+  assigningDemandeIds: Set<number> = new Set();
+
+  // For demo purposes, assuming current user is manager with ID 1
+  // In a real app, this would come from authentication service
+  currentManagerId = 1;
 
   constructor(
     private demandeService: DemandeService,
+    private livreurService: LivreurService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loadDemandes();
+    this.loadLivreurs();
   }
 
   loadDemandes(): void {
@@ -81,5 +90,66 @@ export class DemandeListComponent implements OnInit {
       hour: '2-digit',
       minute: '2-digit'
     });
+  }
+
+  loadLivreurs(): void {
+    this.livreurService.getAllLivreurs().subscribe({
+      next: (livreurs) => {
+        this.livreurs = livreurs;
+      },
+      error: (error) => {
+        console.error('Error loading livreurs:', error);
+      }
+    });
+  }
+
+  onAssignLivreur(demande: Demande): void {
+    if (!demande.id) return;
+    
+    // Simple prompt for now - in a real app, you'd use a modal with dropdown
+    const availableLivreurs = this.livreurs.filter(l => l.disponible);
+    
+    if (availableLivreurs.length === 0) {
+      alert('No available livreurs found. Please check the livreurs management page.');
+      return;
+    }
+    
+    const livreurList = availableLivreurs.map((l, index) => 
+      `${index + 1}. ${l.nom} (${l.email})`
+    ).join('\n');
+    
+    const selection = prompt(
+      `Select a livreur by number:\n${livreurList}\n\nEnter the number (1-${availableLivreurs.length}):`
+    );
+    
+    if (selection) {
+      const selectedIndex = parseInt(selection) - 1;
+      if (selectedIndex >= 0 && selectedIndex < availableLivreurs.length) {
+        const selectedLivreur = availableLivreurs[selectedIndex];
+        this.assignLivreurToDemande(demande.id, selectedLivreur.id!);
+      } else {
+        alert('Invalid selection. Please try again.');
+      }
+    }
+  }
+
+  private assignLivreurToDemande(demandeId: number, livreurId: number): void {
+    this.assigningDemandeIds.add(demandeId);
+    
+    this.demandeService.assignLivreurToDemande(demandeId, livreurId, this.currentManagerId).subscribe({
+      next: () => {
+        this.assigningDemandeIds.delete(demandeId);
+        this.loadDemandes(); // Reload to show updated data
+      },
+      error: (error) => {
+        this.assigningDemandeIds.delete(demandeId);
+        this.error = 'Failed to assign livreur. Please try again.';
+        console.error('Error assigning livreur:', error);
+      }
+    });
+  }
+
+  isAssigning(demandeId: number): boolean {
+    return this.assigningDemandeIds.has(demandeId);
   }
 }

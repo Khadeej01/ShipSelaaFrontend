@@ -1,0 +1,23 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-gray-900 mb-6">Manager Dashboard</h1>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="bg-white rounded-lg shadow p-4">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-semibold">Commandes</h2>
+        <a routerLink="/demandes/new" class="text-sm text-blue-600 hover:underline">Nouvelle commande</a>
+      </div>
+      <app-demande-list></app-demande-list>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-4">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-semibold">Livreurs</h2>
+        <a routerLink="/livreurs" class="text-sm text-blue-600 hover:underline">Gérer</a>
+      </div>
+      <app-livreur-list></app-livreur-list>
+    </div>
+  </div>
+</div>
+
+
