@@ -26,9 +26,9 @@
     </div>
   </div>
 
-  <!-- Form -->
+
   <form *ngIf="!loading || !isEditMode" [formGroup]="demandeForm" (ngSubmit)="onSubmit()" class="bg-white shadow-sm rounded-lg p-6">
-    <!-- Submit Error -->
+
     <div *ngIf="submitError" class="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
       <div class="flex">
         <svg class="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
@@ -79,7 +79,7 @@
         </p>
       </div>
 
-      <!-- Livreur Selection -->
+
       <div>
         <label for="livreurId" class="block text-sm font-medium text-gray-700 mb-2">
           Assign Livreur
@@ -100,7 +100,7 @@
         </p>
       </div>
 
-      <!-- Status Selection -->
+
       <div *ngIf="isEditMode">
         <label for="statut" class="block text-sm font-medium text-gray-700 mb-2">
           Status
@@ -120,7 +120,7 @@
 
     </div>
 
-    <!-- Form Actions -->
+
     <div class="flex justify-end space-x-3 mt-8 pt-6 border-t border-gray-200">
       <button
         type="button"

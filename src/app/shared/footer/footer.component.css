@@ -3,7 +3,7 @@ footer {
   flex-shrink: 0;
 }
 
-/* Custom link hover effects */
+
 .footer-link {
   transition: color 0.3s ease;
 }
@@ -12,7 +12,7 @@ footer {
   color: var(--primary-color);
 }
 
-/* Centered layout styling */
+
 .footer-links {
   transition: all 0.3s ease;
 }
@@ -37,7 +37,7 @@ footer {
   width: 100%;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 640px) {
   .footer-links {
     gap: 1rem;

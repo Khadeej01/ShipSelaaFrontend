@@ -19,8 +19,7 @@ export class DemandeListComponent implements OnInit {
   error: string | null = null;
   assigningDemandeIds: Set<number> = new Set();
 
-  // For demo purposes, assuming current user is manager with ID 1
-  // In a real app, this would come from authentication service
+
   currentManagerId = 1;
 
   constructor(
@@ -37,7 +36,7 @@ export class DemandeListComponent implements OnInit {
   loadDemandes(): void {
     this.loading = true;
     this.error = null;
-    
+
     this.demandeService.getAllDemandes().subscribe({
       next: (demandes) => {
         this.demandes = demandes;
@@ -63,7 +62,7 @@ export class DemandeListComponent implements OnInit {
     if (demande.id && confirm(`Are you sure you want to delete the demande from ${demande.lieuDepart} to ${demande.lieuArrivee}?`)) {
       this.demandeService.deleteDemande(demande.id).subscribe({
         next: () => {
-          this.loadDemandes(); // Reload the list
+          this.loadDemandes();
         },
         error: (error) => {
           this.error = 'Failed to delete demande. Please try again.';
@@ -105,23 +104,23 @@ export class DemandeListComponent implements OnInit {
 
   onAssignLivreur(demande: Demande): void {
     if (!demande.id) return;
-    
-    // Simple prompt for now - in a real app, you'd use a modal with dropdown
+
+
     const availableLivreurs = this.livreurs.filter(l => l.disponible);
-    
+
     if (availableLivreurs.length === 0) {
       alert('No available livreurs found. Please check the livreurs management page.');
       return;
     }
-    
-    const livreurList = availableLivreurs.map((l, index) => 
+
+    const livreurList = availableLivreurs.map((l, index) =>
       `${index + 1}. ${l.nom} (${l.email})`
     ).join('\n');
-    
+
     const selection = prompt(
       `Select a livreur by number:\n${livreurList}\n\nEnter the number (1-${availableLivreurs.length}):`
     );
-    
+
     if (selection) {
       const selectedIndex = parseInt(selection) - 1;
       if (selectedIndex >= 0 && selectedIndex < availableLivreurs.length) {
@@ -135,11 +134,11 @@ export class DemandeListComponent implements OnInit {
 
   private assignLivreurToDemande(demandeId: number, livreurId: number): void {
     this.assigningDemandeIds.add(demandeId);
-    
+
     this.demandeService.assignLivreurToDemande(demandeId, livreurId, this.currentManagerId).subscribe({
       next: () => {
         this.assigningDemandeIds.delete(demandeId);
-        this.loadDemandes(); // Reload to show updated data
+        this.loadDemandes();
       },
       error: (error) => {
         this.assigningDemandeIds.delete(demandeId);

@@ -1,6 +1,4 @@
-/* Home component styles */
 
-/* Hero section animations */
 .hero-title {
   animation: fadeInUp 1s ease-out;
 }
@@ -13,7 +11,7 @@
   animation: fadeInUp 1s ease-out 0.4s both;
 }
 
-/* Service cards hover effects */
+
 .service-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -22,7 +20,7 @@
   transform: translateY(-5px);
 }
 
-/* Step indicator animations */
+
 .step-indicator {
   transition: transform 0.3s ease;
 }
@@ -31,7 +29,7 @@
   transform: scale(1.1);
 }
 
-/* Search input focus effects */
+
 .search-input {
   transition: all 0.3s ease;
 }
@@ -41,7 +39,7 @@
   box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
 }
 
-/* Profile avatar hover effect */
+
 .profile-avatar {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -51,7 +49,7 @@
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
-/* Keyframe animations */
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -74,7 +72,7 @@
   }
 }
 
-/* Material Icons styling */
+
 .material-symbols-outlined {
   font-variation-settings:
     'FILL' 0,
@@ -83,16 +81,16 @@
     'opsz' 24;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .service-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .step-timeline {
     padding-left: 0;
   }

@@ -13,6 +13,6 @@ export const routes: Routes = [
   { path: 'demandes/edit/:id', component: DemandeFormComponent },
   { path: 'livreurs', component: LivreurListComponent },
   { path: 'manager', component: ManagerDashboardComponent },
-  // Additional routes will be added here
-  { path: '**', redirectTo: '' } // Wildcard route for 404 page
+
+  { path: '**', redirectTo: '' }
 ];

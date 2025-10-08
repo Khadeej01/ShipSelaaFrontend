@@ -1,15 +1,14 @@
-/* App component layout styles */
 :host {
   display: block;
   height: 100vh;
 }
 
-/* Ensure proper flex layout */
+
 .min-h-screen {
   min-height: 100vh;
 }
 
-/* Custom scrollbar for webkit browsers */
+
 ::-webkit-scrollbar {
   width: 8px;
 }

@@ -25,9 +25,8 @@ export class DemandeFormComponent implements OnInit {
   loadingLivreurs = false;
   loadingManagers = false;
 
-  // Current manager ID - update this to match an existing manager in your database
-  // You can find the correct ID by checking the response when you create a manager
-  currentManagerId = 1; // Fallback; will be replaced if a manager exists
+
+  currentManagerId = 1;
 
   constructor(
     private fb: FormBuilder,
@@ -40,14 +39,14 @@ export class DemandeFormComponent implements OnInit {
     this.demandeForm = this.fb.group({
       lieuDepart: ['', [Validators.required, Validators.minLength(2)]],
       lieuArrivee: ['', [Validators.required, Validators.minLength(2)]],
-      livreurId: [''], // Optional livreur assignment
+      livreurId: [''],
       statut: [StatusDemande.CREATED]
     });
   }
 
   ngOnInit(): void {
     this.loadManagersAndLivreurs();
-    
+
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.isEditMode = true;
@@ -124,14 +123,14 @@ export class DemandeFormComponent implements OnInit {
       const formValue = this.demandeForm.value;
 
       if (this.isEditMode && this.demandeId) {
-        // Update existing demande
+
         const updateData: Partial<Demande> = {
           lieuDepart: formValue.lieuDepart,
           lieuArrivee: formValue.lieuArrivee,
           statut: formValue.statut
         };
-        
-        // Add livreur if selected
+
+
         if (formValue.livreurId) {
           const selectedLivreur = this.livreurs.find(l => l.id === +formValue.livreurId);
           if (selectedLivreur) {
@@ -150,7 +149,7 @@ export class DemandeFormComponent implements OnInit {
           }
         });
       } else {
-        // Create new demande
+
         const createData: CreateDemandeRequest = {
           lieuDepart: formValue.lieuDepart,
           lieuArrivee: formValue.lieuArrivee,
@@ -159,7 +158,7 @@ export class DemandeFormComponent implements OnInit {
 
         this.demandeService.createDemande(createData).subscribe({
           next: (createdDemande) => {
-            // If a livreur was selected, assign them to the demande
+
             if (formValue.livreurId) {
               this.demandeService.assignLivreurToDemande(
                 createdDemande.id!,
@@ -171,7 +170,7 @@ export class DemandeFormComponent implements OnInit {
                 },
                 error: (error) => {
                   console.error('Error assigning livreur:', error);
-                  // Navigate anyway since demande was created
+
                   this.router.navigate(['/demandes']);
                 }
               });
@@ -187,7 +186,7 @@ export class DemandeFormComponent implements OnInit {
         });
       }
     } else {
-      // Mark all fields as touched to show validation errors
+
       Object.keys(this.demandeForm.controls).forEach(key => {
         this.demandeForm.get(key)?.markAsTouched();
       });

@@ -80,11 +80,11 @@ export class LivreurListComponent implements OnInit {
         nom: formValue.nom,
         email: formValue.email,
         disponible: formValue.disponible,
-        password: 'defaultPassword123' // Default password for new livreurs
+        password: 'defaultPassword123'
       };
 
       if (this.editingLivreur) {
-        // Update existing livreur
+
         livreurData.id = this.editingLivreur.id;
         this.livreurService.updateLivreur(this.editingLivreur.id!, livreurData).subscribe({
           next: () => {
@@ -98,7 +98,7 @@ export class LivreurListComponent implements OnInit {
           }
         });
       } else {
-        // Create new livreur
+
         this.livreurService.createLivreur(livreurData).subscribe({
           next: () => {
             this.showForm = false;
@@ -112,7 +112,7 @@ export class LivreurListComponent implements OnInit {
         });
       }
     } else {
-      // Mark all fields as touched to show validation errors
+
       Object.keys(this.livreurForm.controls).forEach(key => {
         this.livreurForm.get(key)?.markAsTouched();
       });
